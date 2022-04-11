@@ -34,6 +34,28 @@ describe("Gilded Rose", function() {
     expect(items[0].quality).toEqual(1);
   })
 
+  it("Aged Brie, quality increases by 2",function() {
+    // setup
+    const shop = new Shop([ new Item("Aged Brie", 0, 5) ]);
+    // execute
+    const items = shop.updateQuality();
+    // verify
+    expect(items[0].name).toEqual("Aged Brie");
+    expect(items[0].sellIn).toEqual(-1);
+    expect(items[0].quality).toEqual(7);
+  })
+
+  it("Aged Brie, quality never exceeds 50 ",function() {
+    // setup
+    const shop = new Shop([ new Item("Aged Brie", 1, 50) ]);
+    // execute
+    const items = shop.updateQuality();
+    // verify
+    expect(items[0].name).toEqual("Aged Brie");
+    expect(items[0].sellIn).toEqual(0);
+    expect(items[0].quality).toEqual(50);
+  })
+
   it("Sulfuras, quality remains the same",function() {
     // setup
     const shop = new Shop([ new Item("Sulfuras, Hand of Ragnaros", 3, 80) ]);
@@ -77,5 +99,7 @@ describe("Gilded Rose", function() {
     expect(items[0].sellIn).toEqual(9);
     expect(items[0].quality).toEqual(51);
   })
+
+  
 
 });
