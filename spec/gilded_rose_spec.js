@@ -66,6 +66,17 @@ describe('Gilded Rose', function () {
     expect(items[0].quality).toEqual(80)
   })
 
+  it('Sulfuras, quality remains the same', function () {
+    // setup
+    const shop = new Shop([new Item('Sulfuras, potion', 3, 80)])
+    // execute
+    const items = shop.updateQuality()
+    // verify
+    expect(items[0].name).toEqual('Sulfuras, potion')
+    expect(items[0].sellIn).toEqual(3)
+    expect(items[0].quality).toEqual(80)
+  })
+
   it('Backstage passes to a TAFKAL80ETC concert, quality increase by 2 when sellIn < 11 and quality < 50', function () {
     // setup
     const shop = new Shop([
@@ -105,7 +116,20 @@ describe('Gilded Rose', function () {
     expect(items[0].quality).toEqual(51)
   })
 
-  it('Conjured item decreases in quality twice as fast as other items', function () {
+  it('Backstage passes to drake concert, sellIn decreases by 1 and quality stays the same when above 50', function () {
+    // setup
+    const shop = new Shop([
+      new Item('Backstage passes to a drake concert', 10, 51)
+    ])
+    // execute
+    const items = shop.updateQuality()
+    // verify
+    expect(items[0].name).toEqual('Backstage passes to a drake concert')
+    expect(items[0].sellIn).toEqual(9)
+    expect(items[0].quality).toEqual(51)
+  })
+
+  it('Conjured item decreases in quality twice as fast as any other items', function () {
     // setup
     const shop = new Shop([new Item('Conjured Mana Cake', 3, 6)])
     // execute
