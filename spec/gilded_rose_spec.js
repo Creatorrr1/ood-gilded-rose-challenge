@@ -1,5 +1,19 @@
-const { Shop, Item } = require('../src/gilded_rose.js')
+const Shop = require('../src/gilded_rose.js')
+const Item = require('../src/Item')
+
 describe('Gilded Rose', function () {
+  let newShop
+
+  beforeEach(() => {
+    newShop = new Shop([])
+  })
+
+  it('New Shop is empty', function () {
+    // toBe string or number
+    // toEqual => arrays or objects
+    expect(newShop.items.length).toBe(0)
+  })
+
   it('new standard item', function () {
     // setup
     const shop = new Shop([new Item('Limited Edition Chocolate treats', 30, 1)])
